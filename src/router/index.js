@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
   {
@@ -19,7 +19,6 @@ for (let i in modules) {
 }
 
 export default createRouter({
-  // 改成hash模式
   history: createWebHashHistory(),
   routes,
 })
