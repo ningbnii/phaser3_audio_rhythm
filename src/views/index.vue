@@ -28,7 +28,7 @@ onMounted(() => {
   audioRhythmScene = new AudioRhythm(canvasBox.value.clientWidth, canvasBox.value.clientHeight)
 
   let config = {
-    type: Phaser.CANVAS,
+    type: Phaser.AUTO,
     scale: {
       mode: Phaser.DOM.FIT, // 自适应
       parent: myCanvas.value,
@@ -42,9 +42,7 @@ onMounted(() => {
     pixelArt: true, //将 antialias 设置为 false 并将 roundPixels 设置为 true。 这是像素艺术游戏的最佳设置
     audio: {
       // 音频配置对象
-      // 自动播放
-      // autoPlay: true,
-      // disableWebAudio: true,
+      // disableWebAudio: true, // 禁用WebAudioAPI，强制使用HTML5 Audio
       // noAudio: true, // if this is true, it works, with audio enabled it fails
     },
     physics: {

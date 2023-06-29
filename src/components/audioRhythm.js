@@ -10,7 +10,13 @@ class AudioRhythm extends Phaser.Scene {
   create() {
     // this.add.image(this.center.x, this.center.y, 'wizball')
     this.music = this.sound.add('music')
-    this.music.play()
+    if (this.sound.locked) {
+      // 未解锁，需要用户交互才能解锁
+      this.sound.once('unlocked', () => {
+        this.music.play()
+      })
+    }
+    // 音频文件加载完成后，自动播放
     this.i = 0
     this.timePassed = 0
     this.updateInterval = 100 // 调用间隔时间（毫秒）
@@ -30,19 +36,21 @@ class AudioRhythm extends Phaser.Scene {
 
     // // 创建画布和绘图对象
     this.graphics = this.add.graphics()
+    const data = this.getAudioData()
+    this.renderAudioData(data)
   }
 
   startAudioContext() {
-    if (this.sound.context.state === 'suspended') {
-      this.sound.context.resume().then(() => {
-        console.log('Audio context resumed.')
-      })
+    if (this.music.isPlaying) {
+      this.music.pause()
+    } else {
+      this.music.resume()
     }
   }
 
   update(time, delta) {
     this.timePassed += delta
-    if (this.sound.context.state === 'running' && this.timePassed >= this.updateInterval) {
+    if (this.music.isPlaying && this.timePassed >= this.updateInterval) {
       const data = this.getAudioData()
       this.renderAudioData(data)
       this.timePassed -= this.updateInterval
