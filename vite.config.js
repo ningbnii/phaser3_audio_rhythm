@@ -78,6 +78,7 @@ export default defineConfig(({ mode, command }) => {
       open: true,
     },
     build: {
+      outDir: 'docs',
       chunkSizeWarningLimit: 1500,
       rollupOptions: {
         output: {
