@@ -1,3 +1,4 @@
+import * as Phaser from 'Phaser'
 class AudioRhythm extends Phaser.Scene {
   constructor() {
     super()
