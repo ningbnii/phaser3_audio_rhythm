@@ -1,24 +1,25 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
-    path: "/",
-    component: () => import("../views/index.vue"),
+    path: '/',
+    component: () => import('../views/index.vue'),
   },
-];
+]
 
-const modules = import.meta.glob("../views/**/*.vue");
+const modules = import.meta.glob('../views/**/*.vue')
 
 for (let i in modules) {
-  let item = modules[i];
-  const routePath = item.name.replace(/.*views/gi, "").replace(/\.vue/gi, "");
+  let item = modules[i]
+  const routePath = item.name.replace(/.*views/gi, '').replace(/\.vue/gi, '')
   routes.push({
     path: routePath,
     component: item,
-  });
+  })
 }
 
 export default createRouter({
-  history: createWebHistory(),
+  // 改成hash模式
+  history: createWebHashHistory(),
   routes,
-});
+})
